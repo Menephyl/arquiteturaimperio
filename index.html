@@ -42,17 +42,17 @@
     <style>
         :root {
             --bg: #070606;
-            --bg2: #0b0a09;
-            --panel: rgba(18, 14, 12, .72);
-            --panel2: rgba(24, 18, 14, .70);
-            --stroke: rgba(214, 168, 78, .22);
-            --stroke2: rgba(214, 168, 78, .14);
-            --gold: #d6a84e;
-            --gold2: #f1d08b;
-            --text: rgba(255, 255, 255, .88);
-            --muted: rgba(255, 255, 255, .62);
-            --shadow: 0 18px 55px rgba(0, 0, 0, .62);
-            --shadow2: 0 10px 26px rgba(0, 0, 0, .45);
+            --bg2: #0F0F0F;
+            --panel: rgba(15, 15, 15, .75);
+            --panel2: rgba(20, 20, 20, .75);
+            --stroke: rgba(214, 168, 78, .30);
+            --stroke2: rgba(214, 168, 78, .15);
+            --gold: #D6A84E;
+            --gold2: #F4D28C;
+            --text: #FFFFFF;
+            --muted: rgba(255, 255, 255, .75);
+            --shadow: 0 20px 60px rgba(0, 0, 0, .80);
+            --shadow2: 0 10px 30px rgba(0, 0, 0, .60);
             --radius: 18px;
             --radius2: 14px;
             --max: 1080px;
@@ -64,14 +64,15 @@
 
         html,
         body {
-            height: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
         body {
             margin: 0;
             background:
-                radial-gradient(1200px 800px at 70% 15%, rgba(214, 168, 78, .12), transparent 60%),
-                radial-gradient(1000px 600px at 25% 18%, rgba(214, 168, 78, .08), transparent 62%),
+                radial-gradient(1200px 800px at 70% 15%, rgba(214, 168, 78, .15), transparent 60%),
+                radial-gradient(1000px 600px at 25% 18%, rgba(214, 168, 78, .10), transparent 62%),
                 linear-gradient(180deg, var(--bg), var(--bg2) 55%, var(--bg));
             color: var(--text);
             font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -85,9 +86,9 @@
             inset: -30px;
             pointer-events: none;
             background:
-                radial-gradient(900px 520px at 40% 25%, transparent 45%, rgba(0, 0, 0, .55) 80%),
-                repeating-linear-gradient(45deg, rgba(255, 255, 255, .02) 0 2px, transparent 2px 6px);
-            opacity: .92;
+                radial-gradient(1000px 600px at 50% 50%, transparent 40%, rgba(0, 0, 0, .85) 90%),
+                repeating-linear-gradient(45deg, rgba(255, 255, 255, .015) 0 2px, transparent 2px 6px);
+            opacity: .95;
             z-index: -1;
         }
 
@@ -234,30 +235,48 @@
 
         /* Translator in header */
         .lang {
-            display: flex;
+            position: relative;
+            display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 7px 9px;
-            border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, .08);
-            background: rgba(0, 0, 0, .16);
-            color: rgba(255, 255, 255, .72);
-            font-size: 12px;
-            user-select: none;
-            white-space: nowrap;
+            border-radius: 20px;
+            border: 1px solid rgba(214, 168, 78, .30);
+            background: rgba(0, 0, 0, .4);
+            overflow: hidden;
+            box-shadow: inset 0 0 10px rgba(214, 168, 78, .05);
+            transition: border-color .3s ease;
+        }
+        
+        .lang:hover {
+            border-color: rgba(214, 168, 78, .60);
+        }
+
+        .lang svg {
+            position: absolute;
+            left: 12px;
+            width: 16px;
+            height: 16px;
+            stroke: var(--gold2);
+            pointer-events: none;
+            z-index: 2;
         }
 
         .lang select {
             appearance: none;
-            border: 1px solid rgba(214, 168, 78, .18);
-            background: rgba(0, 0, 0, .18);
-            color: rgba(255, 255, 255, .82);
-            padding: 7px 9px;
-            border-radius: 12px;
+            background: transparent;
+            border: none;
+            color: var(--gold2);
+            padding: 8px 16px 8px 36px;
+            font-weight: 600;
+            font-size: 13px;
             cursor: pointer;
-            font-weight: 700;
-            font-size: 12px;
             outline: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .lang select option {
+            background: #0f0f0f;
+            color: #ffffff;
         }
 
         /* Pulsing buttons */
@@ -266,26 +285,29 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            padding: 10px 12px;
+            padding: 12px 18px;
             border-radius: 12px;
-            border: 1px solid rgba(214, 168, 78, .35);
-            background: linear-gradient(180deg, rgba(214, 168, 78, .22), rgba(214, 168, 78, .10));
-            color: rgba(241, 208, 139, .95);
+            border: 1px solid rgba(214, 168, 78, .50);
+            background: linear-gradient(180deg, rgba(214, 168, 78, .25), rgba(214, 168, 78, .10));
+            color: var(--gold2);
             text-decoration: none;
             font-weight: 600;
-            font-size: 12.5px;
-            box-shadow: var(--shadow2);
-            transition: transform .15s ease, border-color .15s ease, background .15s ease;
+            font-size: 13.5px;
+            box-shadow: 0 8px 24px rgba(214, 168, 78, .15), var(--shadow2);
+            transition: transform .3s ease, border-color .3s ease, background .3s ease, box-shadow .3s ease;
             cursor: pointer;
             user-select: none;
             white-space: nowrap;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(4px);
         }
 
         .btn:hover {
-            transform: translateY(-1px);
-            border-color: rgba(214, 168, 78, .55);
+            transform: translateY(-2px);
+            border-color: rgba(214, 168, 78, .80);
+            background: linear-gradient(180deg, rgba(214, 168, 78, .35), rgba(214, 168, 78, .15));
+            box-shadow: 0 12px 32px rgba(214, 168, 78, .25), var(--shadow);
         }
 
         .btn:active {
@@ -293,17 +315,22 @@
         }
 
         .btn.secondary {
-            background: rgba(0, 0, 0, .14);
-            border-color: rgba(255, 255, 255, .10);
-            color: rgba(255, 255, 255, .74);
+            background: rgba(255, 255, 255, .05);
+            border-color: rgba(255, 255, 255, .15);
+            color: rgba(255, 255, 255, .85);
             box-shadow: none;
+        }
+
+        .btn.secondary:hover {
+            background: rgba(255, 255, 255, .10);
+            border-color: rgba(255, 255, 255, .30);
         }
 
         .btn.pulse:before {
             content: "";
             position: absolute;
             inset: -40px;
-            background: radial-gradient(circle at 30% 30%, rgba(214, 168, 78, .28), transparent 55%);
+            background: radial-gradient(circle at 30% 30%, rgba(214, 168, 78, .35), transparent 55%);
             opacity: .75;
             animation: pulse 2.0s ease-in-out infinite;
         }
@@ -480,13 +507,15 @@
         .media {
             position: relative;
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, .08);
-            background: linear-gradient(180deg, rgba(18, 14, 12, .72), rgba(10, 8, 7, .72));
-            box-shadow: var(--shadow);
+            border: 1px solid rgba(214, 168, 78, .25);
+            background: linear-gradient(180deg, rgba(15, 15, 15, .60), rgba(10, 10, 10, .80));
+            box-shadow: 0 24px 60px rgba(0, 0, 0, .80), 0 0 40px rgba(214, 168, 78, .10);
             overflow: hidden;
-            min-height: 270px;
+            min-height: 320px;
             cursor: pointer;
             isolation: isolate;
+            backdrop-filter: blur(12px);
+            transition: transform .4s ease, border-color .4s ease, box-shadow .4s ease;
         }
 
         .media img {
@@ -494,14 +523,21 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            opacity: .92;
-            filter: contrast(1.07) saturate(1.05) brightness(.95);
+            opacity: .75;
+            filter: contrast(1.1) saturate(1.1) brightness(.8);
             transform: scale(1.03);
-            transition: transform .9s ease;
+            transition: transform .9s ease, opacity .9s ease;
+        }
+
+        .media:hover {
+            transform: translateY(-4px);
+            border-color: rgba(214, 168, 78, .50);
+            box-shadow: 0 32px 80px rgba(0, 0, 0, .90), 0 0 60px rgba(214, 168, 78, .20);
         }
 
         .media:hover img {
-            transform: scale(1.10);
+            transform: scale(1.08);
+            opacity: .85;
         }
 
         .media:after {
@@ -509,8 +545,8 @@
             position: absolute;
             inset: 0;
             background:
-                radial-gradient(700px 320px at 60% 10%, rgba(255, 255, 255, .08), transparent 55%),
-                linear-gradient(90deg, rgba(0, 0, 0, .55), rgba(0, 0, 0, .10));
+                radial-gradient(700px 320px at 60% 10%, rgba(214, 168, 78, .15), transparent 60%),
+                linear-gradient(90deg, rgba(0, 0, 0, .65), rgba(0, 0, 0, .20));
             pointer-events: none;
             z-index: 1;
         }
@@ -524,24 +560,32 @@
         }
 
         .play .btnplay {
-            width: 74px;
-            height: 74px;
-            border-radius: 24px;
-            border: 1px solid rgba(214, 168, 78, .40);
-            background: linear-gradient(180deg, rgba(214, 168, 78, .22), rgba(0, 0, 0, .18));
-            box-shadow: 0 22px 70px rgba(0, 0, 0, .60);
+            width: 84px;
+            height: 84px;
+            border-radius: 50%;
+            border: 2px solid rgba(214, 168, 78, .60);
+            background: linear-gradient(135deg, rgba(214, 168, 78, .40), rgba(0, 0, 0, .40));
+            box-shadow: 0 0 30px rgba(214, 168, 78, .30), inset 0 0 20px rgba(214, 168, 78, .20);
             display: grid;
             place-items: center;
-            transition: transform .18s ease, border-color .18s ease;
+            backdrop-filter: blur(8px);
+            transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+        }
+
+        .media:hover .btnplay {
+            transform: scale(1.1);
+            border-color: rgba(214, 168, 78, .90);
+            box-shadow: 0 0 50px rgba(214, 168, 78, .50), inset 0 0 30px rgba(214, 168, 78, .30);
         }
 
         .tri {
             width: 0;
             height: 0;
-            border-top: 12px solid transparent;
-            border-bottom: 12px solid transparent;
-            border-left: 18px solid rgba(241, 208, 139, .92);
-            margin-left: 3px;
+            border-top: 14px solid transparent;
+            border-bottom: 14px solid transparent;
+            border-left: 22px solid rgba(255, 255, 255, .95);
+            margin-left: 6px;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .5));
         }
 
         /* Sections */
@@ -572,29 +616,38 @@
         }
 
         .chip {
-            border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, .08);
-            background: linear-gradient(180deg, rgba(18, 14, 12, .72), rgba(10, 8, 7, .72));
-            box-shadow: 0 14px 40px rgba(0, 0, 0, .42);
-            padding: 14px;
+            border-radius: 16px;
+            border: 1px solid rgba(214, 168, 78, .15);
+            background: linear-gradient(180deg, rgba(15, 15, 15, .6), rgba(10, 10, 10, .8));
+            box-shadow: 0 16px 40px rgba(0, 0, 0, .60), inset 0 0 20px rgba(214, 168, 78, .05);
+            padding: 20px 14px;
             display: flex;
-            gap: 10px;
+            flex-direction: column;
+            gap: 12px;
             align-items: center;
             justify-content: center;
-            min-height: 70px;
-            transition: transform .15s ease, border-color .15s ease;
+            min-height: 100px;
+            backdrop-filter: blur(12px);
+            transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
         }
 
         .chip:hover {
-            transform: translateY(-2px);
-            border-color: rgba(214, 168, 78, .24);
+            transform: translateY(-4px);
+            border-color: rgba(214, 168, 78, .40);
+            box-shadow: 0 24px 50px rgba(0, 0, 0, .80), inset 0 0 30px rgba(214, 168, 78, .10);
         }
 
         .x {
-            width: 18px;
-            height: 18px;
+            width: 32px;
+            height: 32px;
             position: relative;
-            opacity: .9;
+            opacity: 1;
+            border-radius: 50%;
+            background: rgba(214, 168, 78, .1);
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(214, 168, 78, .3);
+            box-shadow: 0 0 15px rgba(214, 168, 78, .2);
         }
 
         .x:before,
@@ -619,8 +672,10 @@
         }
 
         .chip span {
-            color: rgba(255, 255, 255, .78);
-            font-weight: 600;
+            color: rgba(255, 255, 255, .85);
+            font-weight: 500;
+            font-size: 14px;
+            text-align: center;
         }
 
         @media (max-width: 900px) {
@@ -631,14 +686,14 @@
 
         .quote {
             text-align: center;
-            padding: 26px 0 20px;
+            padding: 80px 0 60px;
         }
 
         .quote h3 {
             margin: 0;
             font-family: "Playfair Display", serif;
             font-weight: 600;
-            font-size: 30px;
+            font-size: clamp(28px, 6vw, 40px);
             line-height: 1.1;
             color: rgba(255, 255, 255, .92);
         }
@@ -660,19 +715,28 @@
         }
 
         .card {
-            border-radius: 18px;
-            border: 1px solid rgba(255, 255, 255, .08);
-            background: linear-gradient(180deg, rgba(18, 14, 12, .72), rgba(10, 8, 7, .72));
+            border-radius: 20px;
+            border: 1px solid rgba(214, 168, 78, .15);
+            background: linear-gradient(180deg, rgba(15, 15, 15, .60), rgba(10, 10, 10, .80));
             box-shadow: var(--shadow2);
             overflow: hidden;
+            backdrop-filter: blur(12px);
+            transition: transform .3s ease, border-color .3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(214, 168, 78, .30);
         }
 
         .avatar {
             position: relative;
-            min-height: 240px;
+            min-height: 560px;
             background:
-                radial-gradient(600px 260px at 40% 20%, rgba(214, 168, 78, .18), transparent 62%),
-                url("https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=1200&q=75") center/cover no-repeat;
+                radial-gradient(800px 560px at 40% 20%, rgba(214, 168, 78, .25), transparent 62%),
+                url("/sergio-full.png") center / cover no-repeat;
+            border-radius: 12px;
+            margin: 8px;
         }
 
         .avatar:after {
@@ -730,6 +794,24 @@
             line-height: 1.55;
         }
 
+        .card-text-expansion {
+            margin-top: 24px;
+            color: rgba(255, 255, 255, .76);
+            font-size: 14.5px;
+            line-height: 1.7;
+            padding-top: 20px;
+            border-top: 1px solid rgba(214, 168, 78, .12);
+        }
+
+        .card-text-expansion p {
+            margin: 0 0 14px;
+        }
+
+        .card-text-expansion p:last-child {
+            margin: 0;
+            color: rgba(241, 208, 139, .95);
+        }
+
         .check {
             width: 18px;
             height: 18px;
@@ -755,6 +837,12 @@
         @media (max-width: 980px) {
             .profile {
                 grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 520px) {
+            .avatar {
+                min-height: 440px;
             }
         }
 
@@ -788,14 +876,21 @@
         }
 
         .ba {
-            border-radius: 18px;
-            border: 1px solid rgba(255, 255, 255, .08);
-            background: linear-gradient(180deg, rgba(18, 14, 12, .72), rgba(10, 8, 7, .72));
+            border-radius: 20px;
+            border: 1px solid rgba(214, 168, 78, .15);
+            background: linear-gradient(180deg, rgba(15, 15, 15, .60), rgba(10, 10, 10, .80));
             box-shadow: var(--shadow2);
-            padding: 14px;
+            padding: 16px;
             text-align: left;
             overflow: hidden;
             position: relative;
+            backdrop-filter: blur(12px);
+            transition: transform .3s ease, border-color .3s ease;
+        }
+
+        .ba:hover {
+            transform: translateY(-2px);
+            border-color: rgba(214, 168, 78, .30);
         }
 
         .ba .tag {
@@ -1149,7 +1244,11 @@
 
                     <!-- TRANSLATOR (header) -->
                     <div class="lang" aria-label="Idioma">
-                        <span data-i18n="lang_label">Idioma</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                        </svg>
                         <select id="langSelect" aria-label="Select language">
                             <option value="es" selected>Español (PY)</option>
                             <option value="pt">Português (BR)</option>
@@ -1221,11 +1320,21 @@
                         </div>
 
                         <div class="media reveal" id="mediaCard" role="button" tabindex="0" aria-label="Open video">
-                            <!-- use /hero.jpg in root (public). fallback via JS -->
+                            <!-- iframe youtube temporario 
                             <img id="heroMediaImg" src="/hero.jpg" alt="Crecimiento empresarial" loading="eager" />
                             <div class="play" aria-hidden="true">
                                 <div class="btnplay">
                                     <div class="tri"></div>
+                                </div>
+                            </div>
+                            -->
+                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1600&q=80"
+                                alt="Video placeholder" style="opacity: 0.5; filter: contrast(1.2) grayscale(0.5);" />
+                            <div class="play" aria-hidden="true">
+                                <div class="btnplay" style="width: 100px; height: 100px;">
+                                    <div class="tri"
+                                        style="border-top-width: 18px; border-bottom-width: 18px; border-left-width: 28px;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1238,16 +1347,33 @@
                         <h2 data-i18n="block_title">La mayoría de los negocios se traban antes de escalar.</h2>
                         <div class="chips" role="list">
                             <div class="chip" role="listitem">
-                                <div class="x" aria-hidden="true"></div><span data-i18n="chip1">Dependen del
-                                    precio</span>
+                                <div class="x" aria-hidden="true">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                        stroke="rgba(214,168,78,0.9)" stroke-width="2">
+                                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                                    </svg>
+                                </div>
+                                <span data-i18n="chip1">Dependen del precio</span>
                             </div>
                             <div class="chip" role="listitem">
-                                <div class="x" aria-hidden="true"></div><span data-i18n="chip2">No dominan la
-                                    atención</span>
+                                <div class="x" aria-hidden="true">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                        stroke="rgba(214,168,78,0.9)" stroke-width="2">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                        <circle cx="12" cy="12" r="3" />
+                                    </svg>
+                                </div>
+                                <span data-i18n="chip2">No dominan la atención</span>
                             </div>
                             <div class="chip" role="listitem">
-                                <div class="x" aria-hidden="true"></div><span data-i18n="chip3">No tienen
-                                    posicionamiento</span>
+                                <div class="x" aria-hidden="true">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                        stroke="rgba(214,168,78,0.9)" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <path d="m12 16 4-4-4-4M8 12h8" />
+                                    </svg>
+                                </div>
+                                <span data-i18n="chip3">No tienen posicionamiento</span>
                             </div>
                         </div>
                     </div>
@@ -1289,6 +1415,10 @@
                                     <li><span class="check" aria-hidden="true"></span> <span data-i18n="b3">Operaciones
                                             escalables</span></li>
                                 </ul>
+                                <div class="card-text-expansion">
+                                    <p data-i18n="h4_p2">La <strong>Arquitectura de Imperios</strong> no se trata de trucos a corto plazo. Es la aplicación de ingeniería de negocios enfocada en tres pilares:</p>
+                                    <p data-i18n="h4_p3"><strong>1. Posicionamiento Premium</strong><br><strong>2. Medios de Alta Performance</strong><br><strong>3. Escala Sostenible</strong></p>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -1305,7 +1435,9 @@
                         <div class="ba-wrap">
                             <article class="ba reveal">
                                 <div class="tag" data-i18n="before">ANTES</div>
-                                <div class="phone">
+                                <div class="phone" style="background-image:
+                                    radial-gradient(700px 300px at 60% 10%, rgba(214,168,78,.12), transparent 60%),
+                                    url('/antes.png');">
                                     <div class="metrics">
                                         <div>+ 3.971 <small data-i18n="m_leads">leads</small></div>
                                         <div><span data-i18n="m_low">Baja</span> <small
@@ -1317,8 +1449,8 @@
                             <article class="ba reveal">
                                 <div class="tag" data-i18n="after">DESPUÉS</div>
                                 <div class="phone" style="background-image:
-                  radial-gradient(700px 300px at 60% 10%, rgba(214,168,78,.12), transparent 60%),
-                  url('https://images.unsplash.com/photo-1556155092-490a1ba16284?auto=format&fit=crop&w=1200&q=75');">
+                                    radial-gradient(700px 300px at 60% 10%, rgba(214,168,78,.12), transparent 60%),
+                                    url('/depois.png');">
                                     <div class="metrics">
                                         <div>+ 38.000 <small data-i18n="m_opps">oportunidades</small></div>
                                         <div>+ 152 mil <small data-i18n="m_views">visualizaciones</small></div>
@@ -1512,6 +1644,8 @@
                 b1: "Líderes de mercado",
                 b2: "Marcas dominantes",
                 b3: "Operaciones escalables",
+                h4_p2: "La <strong>Arquitectura de Imperios</strong> no se trata de trucos a corto plazo. Es la aplicación de ingeniería de negocios enfocada en tres pilares:",
+                h4_p3: "<strong>1. Posicionamiento Premium</strong><br><strong>2. Medios de Alta Performance</strong><br><strong>3. Escala Sostenible</strong>",
 
                 apply_title: "Aplicado en la práctica",
                 apply_p: "Trabajo con pocas empresas a la vez. Aplicá para una conversación breve y objetiva.",
@@ -1588,6 +1722,8 @@
                 b1: "Líderes de mercado",
                 b2: "Marcas dominantes",
                 b3: "Operações escaláveis",
+                h4_p2: "A <strong>Arquitetura de Impérios</strong> não é sobre truques de curto prazo. É a aplicação de engenharia de negócios focada em três pilares:",
+                h4_p3: "<strong>1. Posicionamento Premium</strong><br><strong>2. Mídia de Alta Performance</strong><br><strong>3. Escala Sustentável</strong>",
 
                 apply_title: "Aplicado na prática",
                 apply_p: "Trabalho com poucas empresas por vez. Aplique para uma conversa breve e objetiva.",
@@ -1730,9 +1866,9 @@
             document.body.style.overflow = "";
         }
         document.getElementById('btnWatch')?.addEventListener('click', openModal);
-        document.getElementById('mediaCard')?.addEventListener('click', openModal);
+        document.getElementById('mediaCard')?.addEventListener('click', () => window.open('https://www.instagram.com/p/DA1nYR0xYhH/', '_blank'));
         document.getElementById('mediaCard')?.addEventListener('keydown', (e) => {
-            if (e.key === "Enter" || e.key === " ") openModal();
+            if (e.key === "Enter" || e.key === " ") window.open('https://www.instagram.com/p/DA1nYR0xYhH/', '_blank');
         });
         document.getElementById('closeModal')?.addEventListener('click', hideModal);
         modal?.addEventListener('click', (e) => { if (e.target === modal) hideModal(); });
